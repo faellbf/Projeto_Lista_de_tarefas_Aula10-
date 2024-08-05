@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Tarefas</title>
+<style>
+   body{
+      font-family: Arial, sans-serif;
+      background-image: url('https://w.wallhaven.cc/full/ym/wallhaven-ym1o5x.png');
+      }
+      #adicionarTarefa {
+      display: flex;
+      margin-bottom: 20px;
+      }
+      #novaTarefa {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      }
+      #adicionarTarefa button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      }
+      #listaTarefas {
+      list-style: none;
+      padding: 0;
+
+      }
+      #listaTarefas li {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+      }
+      #listaTarefas input[type="checkbox"] {
+      margin-right: 10px;
+      }
+      #listaTarefas li.concluida {
+      text-decoration: line-through;
+      color: #888;
+}
+</style>
+</head>
+<body>
+   <h1>Lista de Tarefas</h1>
+   <div id="adicionarTarefa">
+   <input type="text" id="novaTarefa" placeholder="Digite sua tarefa">
+   <button onclick="adicionarTarefa()">Adicionar</button>
+   </div>
+   <ul id="listaTarefas"></ul>
+<script>
+   function adicionarTarefa() {
+      const novaTarefa = document.getElementById('novaTarefa').value;
+   if (novaTarefa) {
+      const listaTarefas = document.getElementById('listaTarefas');
+      const itemLista = document.createElement('li');
+      const checkbox = document.createElement('input');
+         checkbox.type = 'checkbox';
+         checkbox.addEventListener('change', marcarConcluida);
+      const textoTarefa = document.createElement('span');
+         textoTarefa.textContent = novaTarefa;
+      const botaoRemover = document.createElement('button');
+         botaoRemover.textContent = 'X';
+         botaoRemover.addEventListener('click', removerTarefa);
+         itemLista.appendChild(checkbox);
+         itemLista.appendChild(textoTarefa);
+         itemLista.appendChild(botaoRemover);
+         listaTarefas.appendChild(itemLista);
+         document.getElementById('novaTarefa').value = '';
+}
+}
+   function marcarConcluida(event) {
+      const itemLista = event.target.parentNode;
+      itemLista.classList.toggle('concluida');
+}
+   function removerTarefa(event) {
+      const itemLista = event.target.parentNode;
+      itemLista.parentNode.removeChild(itemLista);
+}
+
+</script>
+</body>
+</html>
